@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ahmed Gamal - Insulin Calculator</title>
+<style>
+body{font-family:Arial;text-align:center;direction:rtl;padding:20px;background:#f4f6f9}
+input{padding:10px;margin:8px;width:80%;font-size:16px}
+button{padding:10px 20px;font-size:16px;background:#2e86de;color:white;border:none;border-radius:5px}
+</style>
+</head>
+<body>
+
+<h2>حاسبة جرعة الإنسولين</h2>
+
+<input id="glucose" type="number" placeholder="السكر الحالي"><br>
+<input id="target" type="number" placeholder="السكر الهدف"><br>
+<input id="carbs" type="number" placeholder="كمية الكارب"><br>
+<input id="icr" type="number" placeholder="معامل الكارب"><br>
+<input id="isf" type="number" placeholder="معامل التصحيح"><br>
+
+<button onclick="calc()">احسب</button>
+
+<h3 id="result"></h3>
+
+<script>
+function calc(){
+let g=document.getElementById("glucose").value;
+let t=document.getElementById("target").value;
+let c=document.getElementById("carbs").value;
+let i=document.getElementById("icr").value;
+let s=document.getElementById("isf").value;
+
+let meal=c/i;
+let corr=(g-t)/s;
+if(corr<0){corr=0;}
+
+let total=parseFloat(meal)+parseFloat(corr);
+
+document.getElementById("result").innerHTML=
+"جرعة الأكل: "+meal.toFixed(1)+" وحدة<br>"+
+"جرعة التصحيح: "+corr.toFixed(1)+" وحدة<br>"+
+"الإجمالي: "+total.toFixed(1)+" وحدة";
+}
+</script>
+
+</body>
+</html>
